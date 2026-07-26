@@ -38,6 +38,12 @@ Other commands:
 and no environment variables, so it can be dropped onto Netlify, Vercel, GitHub Pages, or any plain
 web host.
 
+### Netlify
+
+The repository includes [netlify.toml](netlify.toml), so Netlify automatically uses Node 22, runs
+`npm run build`, and publishes `dist/`. Import the repository in Netlify and deploy it; no additional
+build settings, redirects, or environment variables are required.
+
 Two choices make it unusually portable, which matters for shelters and community labs:
 
 - **Relative asset paths** (`base: './'` in [vite.config.ts](vite.config.ts)) mean the site works
@@ -47,14 +53,23 @@ Two choices make it unusually portable, which matters for shelters and community
 
 ## Course structure
 
-| Module | Lessons | Hands-on practice |
-| --- | --- | --- |
-| Start Here | Welcome, how to move around | — |
-| How a Computer Works | Terminology, hardware, software | Clickable computer diagram, app-to-job matching, quiz |
-| Using a Windows PC | Power on and sign in, the desktop, clicking, shortcuts | Simulated Windows 11 desktop, click trainer, `Ctrl` drills, quizzes |
-| Using a Mac | Starting up, the desktop, right-clicking, shortcuts | Simulated Mac desktop, click trainer, `Command` drills |
-| Documents & the Cloud | Microsoft Office, Google Workspace, choosing a tool | Microsoft-to-Google matching, "which app?" scenarios |
-| You Did It | Review and habits to keep | Final quiz, printable certificate |
+Like the two original workshops, the course splits into a **Windows part** and a **Mac part**. On
+the home page the learner answers "Which computer are you learning?" — Windows, Mac, or "show me
+both" — and the journey, progress bar, next-up prompt and certificate all follow that choice. The
+universal material (fundamentals, documents, the finish) is shared, so nobody sits through it twice.
+Each OS part opens on its own hub with a photographic hero and an animated "first look" that builds
+the desktop piece by piece, so someone who has never touched that system still gets a feel for it.
+The path lives in `localStorage` and can be switched at any time; the other part stays explorable
+without counting against progress.
+
+| Module | Belongs to | Lessons | Hands-on practice |
+| --- | --- | --- | --- |
+| Start Here | Everyone | Welcome, how to move around | — |
+| How a Computer Works | Everyone | Terminology, hardware, software | Clickable computer diagram, app-to-job matching, quiz |
+| Using a Windows PC | **Part 1 · Windows** | Power on and sign in, the desktop, clicking, shortcuts | Animated first look, simulated Windows 11 desktop, click trainer, `Ctrl` drills, quizzes |
+| Using a Mac | **Part 2 · Mac** | Starting up, the desktop, right-clicking, shortcuts | Animated first look, simulated Mac desktop, click trainer, `Command` drills |
+| Documents & the Cloud | Everyone | Microsoft Office, Google Workspace, choosing a tool | Microsoft-to-Google matching, "which app?" scenarios |
+| You Did It | Everyone | Review and habits to keep | Final quiz, printable certificate |
 
 ## How progress is saved
 
@@ -99,17 +114,19 @@ Animation is CSS-first throughout, reserving JavaScript for state rather than fo
 
 ```
 src/
-  assets/            Hero image
+  assets/            Hero images (landing, Windows scene, Mac scene)
   components/
     activities/      The seven interactive activity types
       desktops/      Simulated Windows 11 and macOS desktops
     brand/           Brandmark and hero
+    firstlook/       Animated "first look" that builds each desktop piece by piece
+    home/            The "which computer?" path chooser
     layout/          Site shell
     ui/              Callouts, icons
     whimsy/          Particle effects
-  content/           Course content as typed data
+  content/           Course content as typed data (modules carry a track + path helpers)
     lessons/         One file per module
-  lib/               Progress storage, reduced-motion hook
+  lib/               Progress storage (incl. chosen path), reduced-motion hook
   pages/             Home, Module, Lesson, Certificate
   styles/            Design tokens and global CSS
 ```

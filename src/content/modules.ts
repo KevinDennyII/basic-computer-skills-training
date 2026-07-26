@@ -27,6 +27,10 @@ export const modules: CourseModule[] = [
       'Turn it on, sign in, read the desktop, use the Start button, click with confidence, and learn the shortcuts that save real time.',
     accent: 'teal',
     icon: 'windows',
+    track: 'windows',
+    partLabel: 'Part 1',
+    hero: 'windows',
+    firstLook: 'windows',
   },
   {
     id: 'mac',
@@ -36,6 +40,10 @@ export const modules: CourseModule[] = [
       'The same skills on Apple hardware: the Dock, the menu bar, right-clicking on a trackpad, and Command-key shortcuts.',
     accent: 'coral',
     icon: 'apple',
+    track: 'mac',
+    partLabel: 'Part 2',
+    hero: 'mac',
+    firstLook: 'mac',
   },
   {
     id: 'docs',

@@ -111,6 +111,12 @@
     margin-inline-start: 0;
   }
 
+  .navLink {
+    flex: 1;
+    padding: var(--space-3) var(--space-3);
+    text-align: center;
+  }
+
   .progressReadout {
     margin-inline-start: auto;
   }

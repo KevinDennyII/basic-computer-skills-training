@@ -2,7 +2,15 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { lessonsByModule, moduleById } from '../content';
 import { useProgress } from '../lib/ProgressContext';
 import ModuleIcon from '../components/ui/ModuleIcon';
+import DesktopFirstLook from '../components/firstlook/DesktopFirstLook';
+import heroWindows from '../assets/hero-windows.jpg';
+import heroMac from '../assets/hero-mac.jpg';
 import styles from './ModulePage.module.css';
+
+const HERO_IMAGES = {
+  windows: heroWindows,
+  mac: heroMac,
+} as const;
 
 export default function ModulePage() {
   const { moduleId } = useParams();
@@ -12,36 +20,80 @@ export default function ModulePage() {
   if (!courseModule) return <Navigate to="/" replace />;
 
   const moduleLessons = lessonsByModule.get(courseModule.id) ?? [];
+  const isOsHub = Boolean(courseModule.hero || courseModule.firstLook);
 
   return (
     <div className={styles.page} data-accent={courseModule.accent}>
-      <header className={styles.head}>
-        <Link to="/" className={styles.back}>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M19 12H6m0 0 5-5m-5 5 5 5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          All lessons
-        </Link>
-
-        <div className={styles.headMain}>
-          <span className={styles.iconWrap}>
-            <ModuleIcon icon={courseModule.icon} className={styles.icon} />
-          </span>
-          <div>
-            <p className={styles.eyebrow}>{courseModule.tagline}</p>
-            <h1 className={styles.title}>{courseModule.title}</h1>
+      {isOsHub && courseModule.hero ? (
+        <header className={styles.osHead}>
+          <Link to="/" className={styles.backFloating}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M19 12H6m0 0 5-5m-5 5 5 5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            All lessons
+          </Link>
+          <img className={styles.osHeroImage} src={HERO_IMAGES[courseModule.hero]} alt="" />
+          <div className={styles.osHeroText}>
+            {courseModule.partLabel && (
+              <span className={styles.osPart}>{courseModule.partLabel}</span>
+            )}
+            <h1 className={styles.osTitle}>{courseModule.title}</h1>
+            <p className={styles.osTagline}>{courseModule.tagline}</p>
           </div>
-        </div>
+        </header>
+      ) : (
+        <header className={styles.head}>
+          <Link to="/" className={styles.back}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M19 12H6m0 0 5-5m-5 5 5 5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            All lessons
+          </Link>
 
-        <p className={styles.description}>{courseModule.description}</p>
-      </header>
+          <div className={styles.headMain}>
+            <span className={styles.iconWrap}>
+              <ModuleIcon icon={courseModule.icon} className={styles.icon} />
+            </span>
+            <div>
+              <p className={styles.eyebrow}>{courseModule.tagline}</p>
+              <h1 className={styles.title}>{courseModule.title}</h1>
+            </div>
+          </div>
+
+          <p className={styles.description}>{courseModule.description}</p>
+        </header>
+      )}
+
+      {courseModule.firstLook && (
+        <section className={styles.firstLook} aria-labelledby="firstlook-heading">
+          <div className={styles.firstLookHead}>
+            <h2 id="firstlook-heading" className={styles.firstLookTitle}>
+              A first look — no {courseModule.firstLook === 'windows' ? 'PC' : 'Mac'} needed
+            </h2>
+            <p className={styles.firstLookBlurb}>
+              Watch the screen come together piece by piece, so it already feels familiar the first
+              time you sit down at one.
+            </p>
+          </div>
+          <DesktopFirstLook flavor={courseModule.firstLook} />
+        </section>
+      )}
+
+      {isOsHub && <p className={styles.osDescription}>{courseModule.description}</p>}
 
       <ol className={styles.lessonList}>
         {moduleLessons.map((lesson, index) => {

@@ -9,10 +9,14 @@ import {
 } from 'react';
 import { clearProgress, emptyProgress, readProgress, writeProgress } from './progress';
 import type { ProgressState } from './progress';
-import { lessons, lessonsByModule } from '../content';
+import { lessonsByModule, lessonsForPath } from '../content';
+import type { LearnerPath } from '../content/types';
 
 interface ProgressContextValue {
   state: ProgressState;
+  /** The path used for all progress math. Falls back to `both` until one is chosen. */
+  activePath: LearnerPath;
+  hasChosenPath: boolean;
   completedCount: number;
   totalLessons: number;
   percentComplete: number;
@@ -20,6 +24,7 @@ interface ProgressContextValue {
   markComplete: (lessonId: string) => void;
   recordQuiz: (activityId: string, correct: number, total: number) => void;
   setLearnerName: (name: string) => void;
+  setPath: (path: LearnerPath) => void;
   resetEverything: () => void;
   moduleProgress: (moduleId: string) => { done: number; total: number };
   nextUpLessonId: string;
@@ -59,25 +64,34 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     setState((current) => ({ ...current, learnerName: name }));
   }, []);
 
+  const setPath = useCallback((path: LearnerPath) => {
+    setState((current) => ({ ...current, path }));
+  }, []);
+
   const resetEverything = useCallback(() => {
     clearProgress();
     setState(emptyProgress);
   }, []);
 
   const value = useMemo<ProgressContextValue>(() => {
+    const activePath: LearnerPath = state.path ?? 'both';
     const completedSet = new Set(state.completedLessonIds);
-    const completedCount = lessons.filter((lesson) => completedSet.has(lesson.id)).length;
-    const firstUnfinished = lessons.find((lesson) => !completedSet.has(lesson.id));
+    const pathLessons = lessonsForPath(activePath);
+    const completedCount = pathLessons.filter((lesson) => completedSet.has(lesson.id)).length;
+    const firstUnfinished = pathLessons.find((lesson) => !completedSet.has(lesson.id));
 
     return {
       state,
+      activePath,
+      hasChosenPath: state.path !== null,
       completedCount,
-      totalLessons: lessons.length,
-      percentComplete: Math.round((completedCount / lessons.length) * 100),
+      totalLessons: pathLessons.length,
+      percentComplete: Math.round((completedCount / pathLessons.length) * 100),
       isComplete: (lessonId: string) => completedSet.has(lessonId),
       markComplete,
       recordQuiz,
       setLearnerName,
+      setPath,
       resetEverything,
       moduleProgress: (moduleId: string) => {
         const moduleLessons = lessonsByModule.get(moduleId) ?? [];
@@ -86,14 +100,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
           total: moduleLessons.length,
         };
       },
-      nextUpLessonId: firstUnfinished?.id ?? lessons[0].id,
-      courseFinished: completedCount === lessons.length,
+      nextUpLessonId: firstUnfinished?.id ?? pathLessons[0].id,
+      courseFinished: completedCount === pathLessons.length,
     };
-  }, [state, markComplete, recordQuiz, setLearnerName, resetEverything]);
+  }, [state, markComplete, recordQuiz, setLearnerName, setPath, resetEverything]);
 
   return <ProgressContext.Provider value={value}>{children}</ProgressContext.Provider>;
 }
-
 
 export function useProgress(): ProgressContextValue {
   const context = useContext(ProgressContext);

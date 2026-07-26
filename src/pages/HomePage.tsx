@@ -1,17 +1,55 @@
 import { Link } from 'react-router-dom';
-import { modules, lessonsByModule, lessonById, totalMinutes } from '../content';
+import {
+  lessonsByModule,
+  lessonById,
+  modulesForPath,
+  minutesForPath,
+  moduleById,
+} from '../content';
 import { useProgress } from '../lib/ProgressContext';
 import Brandmark from '../components/brand/Brandmark';
 import ModuleIcon from '../components/ui/ModuleIcon';
 import HeroScene from '../components/brand/HeroScene';
+import PathChooser from '../components/home/PathChooser';
 import styles from './HomePage.module.css';
 
+const PATH_HEADINGS: Record<string, { title: string; blurb: string }> = {
+  windows: {
+    title: 'Your Windows path',
+    blurb:
+      'The shared basics, then everything about a Windows PC. Stop between any part and your place is saved.',
+  },
+  mac: {
+    title: 'Your Mac path',
+    blurb:
+      'The shared basics, then everything about a Mac. Stop between any part and your place is saved.',
+  },
+  both: {
+    title: 'Everything you will learn',
+    blurb: 'The shared basics plus both computers. Stop between any part and your place is saved.',
+  },
+};
+
 export default function HomePage() {
-  const { nextUpLessonId, completedCount, moduleProgress, resetEverything, percentComplete } =
-    useProgress();
+  const {
+    activePath,
+    hasChosenPath,
+    nextUpLessonId,
+    completedCount,
+    moduleProgress,
+    resetEverything,
+    percentComplete,
+  } = useProgress();
 
   const nextLesson = lessonById.get(nextUpLessonId);
   const started = completedCount > 0;
+
+  const journeyModules = modulesForPath(activePath);
+  const heading = PATH_HEADINGS[activePath];
+  const pathMinutes = Math.round(minutesForPath(activePath) / 5) * 5;
+
+  const otherTrack = activePath === 'windows' ? 'mac' : activePath === 'mac' ? 'windows' : null;
+  const otherModule = otherTrack ? moduleById.get(otherTrack) : undefined;
 
   return (
     <>
@@ -21,8 +59,9 @@ export default function HomePage() {
           <Brandmark size="hero" />
           <h1 className={styles.headline}>Learn the computer, one small win at a time.</h1>
           <p className={styles.support}>
-            A hands-on course for anyone who was never shown how. Practice on a Windows PC and a Mac
-            without touching a single real setting — because nothing here can break.
+            A hands-on course for anyone who was never shown how. Choose the computer you have —
+            Windows or Mac — and practice without touching a single real setting, because nothing
+            here can break.
           </p>
           <div className={styles.ctaGroup}>
             <Link className={styles.primaryCta} to={`/lesson/${nextUpLessonId}`}>
@@ -38,24 +77,36 @@ export default function HomePage() {
                 />
               </svg>
             </Link>
-            <a className={styles.secondaryCta} href="#lessons">
-              See all {modules.length} parts
+            <a className={styles.secondaryCta} href="#choose">
+              Choose your computer
             </a>
           </div>
         </div>
       </section>
 
+      <section className={styles.section} id="choose" aria-labelledby="choose-heading">
+        <div className={styles.sectionHead}>
+          <h2 id="choose-heading">Which computer are you learning?</h2>
+          <p>
+            Just like the two workshops this grew from, the course splits into a Windows part and a
+            Mac part. Pick yours — you can switch or explore both whenever you like.
+          </p>
+        </div>
+        <div className={styles.chooser}>
+          <PathChooser />
+        </div>
+      </section>
+
       <section className={styles.section} id="lessons" aria-labelledby="lessons-heading">
         <div className={styles.sectionHead}>
-          <h2 id="lessons-heading">Everything you will learn</h2>
+          <h2 id="lessons-heading">{heading.title}</h2>
           <p>
-            Six short parts, about {Math.round(totalMinutes / 5) * 5} minutes in total. Stop between
-            any of them and your place is saved.
+            {journeyModules.length} short parts, about {pathMinutes} minutes in total. {heading.blurb}
           </p>
         </div>
 
         <ol className={styles.moduleList}>
-          {modules.map((entry, index) => {
+          {journeyModules.map((entry, index) => {
             const moduleLessons = lessonsByModule.get(entry.id) ?? [];
             const { done, total } = moduleProgress(entry.id);
             const finished = total > 0 && done === total;
@@ -70,6 +121,7 @@ export default function HomePage() {
                     <ModuleIcon icon={entry.icon} className={styles.moduleIcon} />
                   </span>
                   <span className={styles.moduleText}>
+                    {entry.partLabel && <span className={styles.partTag}>{entry.partLabel}</span>}
                     <span className={styles.moduleTitle}>{entry.title}</span>
                     <span className={styles.moduleTagline}>{entry.tagline}</span>
                     <span className={styles.moduleDescription}>{entry.description}</span>
@@ -87,12 +139,42 @@ export default function HomePage() {
             );
           })}
         </ol>
+
+        {otherModule && (
+          <Link className={styles.otherTrack} to={`/module/${otherModule.id}`}>
+            <span className={styles.otherIcon}>
+              <ModuleIcon icon={otherModule.icon} className={styles.moduleIcon} />
+            </span>
+            <span className={styles.otherText}>
+              <span className={styles.otherEyebrow}>Also curious about the other one?</span>
+              <span className={styles.otherTitle}>
+                Take a look at {otherModule.title.replace('Using ', '')}
+              </span>
+              <span className={styles.otherBlurb}>
+                It is not part of your path, so it will not count against your progress — but you are
+                welcome to explore.
+              </span>
+            </span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" className={styles.otherArrow}>
+              <path
+                d="M5 12h13m0 0-5-5m5 5-5 5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
+        )}
       </section>
 
       {nextLesson && (
         <section className={styles.section} aria-labelledby="next-heading">
           <div className={styles.nextUp}>
-            <p className={styles.nextEyebrow}>Next up for you</p>
+            <p className={styles.nextEyebrow}>
+              {hasChosenPath ? 'Next up for you' : 'A good place to start'}
+            </p>
             <h2 id="next-heading" className={styles.nextTitle}>
               {nextLesson.title}
             </h2>

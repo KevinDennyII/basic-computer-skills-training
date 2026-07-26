@@ -11,7 +11,7 @@ export default function LessonPage() {
   const { lessonId } = useParams();
   const navigate = useNavigate();
   const lesson = lessonId ? lessonById.get(lessonId) : undefined;
-  const { isComplete, markComplete } = useProgress();
+  const { isComplete, markComplete, activePath } = useProgress();
   const [celebrate, setCelebrate] = useState(0);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function LessonPage() {
   const courseModule = moduleById.get(lesson.moduleId);
   const siblings = lessonsByModule.get(lesson.moduleId) ?? [];
   const positionInModule = siblings.findIndex((entry) => entry.id === lesson.id) + 1;
-  const { previous, next } = neighbours(lesson.id);
+  const { previous, next } = neighbours(lesson.id, activePath);
   const done = isComplete(lesson.id);
 
   const handleFinish = () => {

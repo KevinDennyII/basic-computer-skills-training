@@ -119,6 +119,12 @@ export interface Lesson {
   activity?: Activity;
 }
 
+/** Which operating-system track a module belongs to. Universal modules omit this. */
+export type Track = 'windows' | 'mac';
+
+/** What a learner chose to study. `both` shows everything. */
+export type LearnerPath = 'windows' | 'mac' | 'both';
+
 export interface CourseModule {
   id: string;
   title: string;
@@ -126,4 +132,12 @@ export interface CourseModule {
   description: string;
   accent: 'teal' | 'coral' | 'sun' | 'leaf';
   icon: 'compass' | 'chip' | 'windows' | 'apple' | 'docs' | 'star';
+  /** Present only on the two OS parts; universal modules leave it undefined. */
+  track?: Track;
+  /** e.g. "Part 1" — shown as an eyebrow on the OS parts. */
+  partLabel?: string;
+  /** Which photographic hero to show on the module hub. */
+  hero?: Track;
+  /** Which animated first-look walkthrough to show at the top of the hub. */
+  firstLook?: Track;
 }

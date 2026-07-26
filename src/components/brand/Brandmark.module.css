@@ -79,6 +79,21 @@
   font-size: var(--step-4);
 }
 
+@media (max-width: 52rem) {
+  .hero .glyph {
+    width: clamp(2.75rem, 12vw, 3.75rem);
+  }
+
+  .hero .name {
+    font-size: var(--step-3);
+  }
+
+  .hero .tagline {
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+  }
+}
+
 .tagline {
   font-size: 0.75rem;
   font-weight: 500;

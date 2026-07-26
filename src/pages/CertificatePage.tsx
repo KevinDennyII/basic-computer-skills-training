@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { modules, lessons } from '../content';
+import { modulesForPath, lessonsForPath } from '../content';
 import { useProgress } from '../lib/ProgressContext';
 import SparkleBurst from '../components/whimsy/SparkleBurst';
 import styles from './CertificatePage.module.css';
@@ -11,13 +11,28 @@ const dateFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
 });
 
+const CERT_SCOPE: Record<string, string> = {
+  windows: 'computer fundamentals, using a Windows PC,',
+  mac: 'computer fundamentals, using a Mac,',
+  both: 'computer fundamentals, Windows, macOS,',
+};
+
 export default function CertificatePage() {
-  const { state, setLearnerName, courseFinished, completedCount, totalLessons, nextUpLessonId } =
-    useProgress();
+  const {
+    state,
+    activePath,
+    setLearnerName,
+    courseFinished,
+    completedCount,
+    totalLessons,
+    nextUpLessonId,
+  } = useProgress();
   const [draftName, setDraftName] = useState(state.learnerName);
   const [burst, setBurst] = useState(0);
 
   const name = state.learnerName.trim();
+  const pathLessons = lessonsForPath(activePath);
+  const pathModules = modulesForPath(activePath);
 
   return (
     <div className={styles.page}>
@@ -69,8 +84,8 @@ export default function CertificatePage() {
               <p className={styles.certAwarded}>This certifies that</p>
               <p className={styles.certName}>{name || 'Your name here'}</p>
               <p className={styles.certBody}>
-                has completed the Basic Computer Skills Workshop, covering computer fundamentals,
-                Windows, macOS, and everyday documents in Microsoft 365 and Google Workspace.
+                has completed the Basic Computer Skills Workshop, covering {CERT_SCOPE[activePath]}{' '}
+                and everyday documents in Microsoft 365 and Google Workspace.
               </p>
               <div className={styles.certFooter}>
                 <div>
@@ -119,7 +134,7 @@ export default function CertificatePage() {
           <section className={styles.reviewSection}>
             <h2>Want to go over anything again?</h2>
             <ul className={styles.moduleLinks}>
-              {modules.map((entry) => (
+              {pathModules.map((entry) => (
                 <li key={entry.id}>
                   <Link to={`/module/${entry.id}`}>{entry.title}</Link>
                 </li>
@@ -154,7 +169,7 @@ export default function CertificatePage() {
           </Link>
 
           <ul className={styles.checklist}>
-            {lessons.map((lesson) => (
+            {pathLessons.map((lesson) => (
               <li key={lesson.id} data-done={state.completedLessonIds.includes(lesson.id)}>
                 <span className={styles.checkMark} aria-hidden="true">
                   {state.completedLessonIds.includes(lesson.id) ? '✓' : ''}

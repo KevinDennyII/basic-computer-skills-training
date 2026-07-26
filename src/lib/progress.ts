@@ -1,3 +1,5 @@
+import type { LearnerPath } from '../content/types';
+
 const STORAGE_KEY = 'bcs-progress-v1';
 
 export interface ProgressState {
@@ -5,6 +7,8 @@ export interface ProgressState {
   currentLessonId: string | null;
   quizScores: Record<string, { correct: number; total: number }>;
   learnerName: string;
+  /** Which computer the learner is studying. `null` = not chosen yet. */
+  path: LearnerPath | null;
 }
 
 export const emptyProgress: ProgressState = {
@@ -12,6 +16,7 @@ export const emptyProgress: ProgressState = {
   currentLessonId: null,
   quizScores: {},
   learnerName: '',
+  path: null,
 };
 
 function isProgressShape(value: unknown): value is ProgressState {
