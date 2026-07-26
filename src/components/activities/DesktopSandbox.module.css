@@ -1,0 +1,135 @@
+.instructionBar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  background-image: linear-gradient(135deg, var(--teal-800), var(--teal-900));
+  border-radius: var(--radius-md);
+  color: var(--surface);
+}
+
+.instructionBar[data-finished='true'] {
+  background-image: linear-gradient(135deg, var(--leaf-500), var(--leaf-600));
+}
+
+.instructionIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--sun-500);
+}
+
+.instructionBar[data-finished='true'] .instructionIcon {
+  color: var(--surface);
+}
+
+.instructionIcon svg {
+  width: 100%;
+  height: 100%;
+  animation: point 2.4s ease-in-out infinite;
+}
+
+.instructionText {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.screenWrap {
+  margin-top: var(--space-4);
+}
+
+.bezel {
+  position: relative;
+  padding: 10px;
+  background-image: linear-gradient(160deg, #47555c, #232f35);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lift);
+}
+
+.pretendLabel {
+  margin-top: var(--space-2);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--ink-300);
+  text-align: center;
+}
+
+.feedbackRight,
+.feedbackWrong {
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-4);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  animation: slideIn 300ms var(--ease-out) both;
+}
+
+.feedbackRight {
+  color: #17512f;
+  background-color: var(--leaf-100);
+}
+
+.feedbackWrong {
+  color: var(--ink-700);
+  background-color: var(--sun-100);
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter {
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.restart {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--teal-800);
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.restart:hover {
+  color: var(--surface);
+  background-color: var(--teal-700);
+}
+
+@keyframes point {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3px, -2px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 42rem) {
+  .counter,
+  .pretendLabel {
+    font-size: 1rem;
+  }
+}

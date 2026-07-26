@@ -1,0 +1,71 @@
+.callout {
+  --callout-accent: var(--teal-500);
+  --callout-wash: var(--teal-100);
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+  margin-block: var(--space-5);
+  background-color: var(--callout-wash);
+  border-left: 4px solid var(--callout-accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.tip {
+  --callout-accent: var(--leaf-500);
+  --callout-wash: var(--leaf-100);
+}
+
+.warning {
+  --callout-accent: var(--coral-500);
+  --callout-wash: var(--coral-100);
+}
+
+.note {
+  --callout-accent: var(--sun-500);
+  --callout-wash: var(--sun-100);
+}
+
+.label {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--callout-accent);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.callout:hover .icon {
+  animation: tilt 600ms var(--ease-spring);
+}
+
+.body {
+  color: var(--ink-700);
+}
+
+@keyframes tilt {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  40% {
+    transform: rotate(-9deg) scale(1.12);
+  }
+  75% {
+    transform: rotate(6deg) scale(1.04);
+  }
+}

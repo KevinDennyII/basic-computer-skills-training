@@ -1,0 +1,362 @@
+.page {
+  width: min(100% - 2rem, 54rem);
+  margin-inline: auto;
+  padding-block: var(--space-6) 0;
+}
+
+.eyebrow {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--coral-600);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.title {
+  position: relative;
+  margin-top: var(--space-2);
+  font-size: var(--step-4);
+}
+
+.titleSparkle {
+  position: absolute;
+  top: 40%;
+  right: 8%;
+}
+
+.lede {
+  max-width: 40rem;
+  margin-top: var(--space-3);
+  font-size: var(--step-1);
+  color: var(--ink-500);
+}
+
+.nameForm {
+  margin-top: var(--space-6);
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.input {
+  flex: 1 1 16rem;
+  padding: var(--space-3) var(--space-4);
+  /* 1rem minimum keeps iOS Safari from zooming when this field is focused. */
+  font-size: max(1rem, var(--step-0));
+  background-color: var(--surface);
+  border: 2px solid var(--border-soft);
+  border-radius: var(--radius-md);
+}
+
+.input:focus-visible {
+  border-color: var(--teal-500);
+}
+
+.saveButton {
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--surface);
+  background-color: var(--teal-700);
+  border: none;
+  border-radius: var(--radius-md);
+  transition: transform 200ms var(--ease-spring);
+}
+
+.saveButton:hover {
+  transform: translateY(-2px);
+}
+
+.certificate {
+  margin-top: var(--space-6);
+  padding: 10px;
+  background-image: linear-gradient(135deg, var(--sun-500), var(--coral-500), var(--teal-500));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+}
+
+.certInner {
+  padding: var(--space-7) var(--space-6);
+  text-align: center;
+  background-color: var(--surface);
+  border-radius: calc(var(--radius-lg) - 6px);
+}
+
+.certEyebrow {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--teal-500);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+
+.certAwarded {
+  margin-top: var(--space-5);
+  font-size: var(--step--1);
+  color: var(--ink-500);
+}
+
+.certName {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--teal-900);
+  letter-spacing: -0.02em;
+}
+
+.certBody {
+  max-width: 34rem;
+  margin: var(--space-4) auto 0;
+  color: var(--ink-700);
+}
+
+.certFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-soft);
+  text-align: left;
+}
+
+.certRight {
+  text-align: right;
+}
+
+.certLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-300);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.certValue {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.certSeal {
+  width: 4rem;
+  color: var(--leaf-500);
+}
+
+.certSeal svg {
+  width: 100%;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  margin-top: var(--space-5);
+}
+
+.printButton {
+  display: inline-block;
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--surface);
+  text-decoration: none;
+  background-image: linear-gradient(135deg, var(--coral-500), var(--coral-600));
+  border: none;
+  border-radius: var(--radius-md);
+  box-shadow: 0 14px 26px -16px rgba(207, 70, 54, 0.9);
+  transition: transform 200ms var(--ease-spring);
+}
+
+.printButton:hover {
+  transform: translateY(-2px);
+}
+
+.secondaryAction {
+  padding: var(--space-3) var(--space-4);
+  font-weight: 500;
+  color: var(--teal-800);
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.secondaryAction:hover {
+  color: var(--surface);
+  background-color: var(--teal-700);
+}
+
+.reviewSection {
+  margin-top: var(--space-8);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-soft);
+}
+
+.reviewSection h2 {
+  font-size: var(--step-2);
+}
+
+.moduleLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: 0;
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
+.moduleLinks li {
+  margin: 0;
+}
+
+.moduleLinks a {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  font-weight: 500;
+  color: var(--teal-800);
+  text-decoration: none;
+  background-color: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms var(--ease-spring);
+}
+
+.moduleLinks a:hover {
+  transform: translateY(-2px);
+}
+
+/* Locked state */
+.lockedProgress {
+  margin-top: var(--space-6);
+}
+
+.lockedTrack {
+  height: 14px;
+  overflow: hidden;
+  background-color: rgba(6, 51, 63, 0.12);
+  border-radius: 999px;
+}
+
+.lockedFill {
+  height: 100%;
+  background-image: linear-gradient(90deg, var(--teal-500), var(--leaf-500));
+  border-radius: inherit;
+  transition: width 700ms var(--ease-spring);
+}
+
+.lockedCount {
+  margin-top: var(--space-2);
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.locked .printButton {
+  margin-top: var(--space-5);
+}
+
+.checklist {
+  padding: 0;
+  margin-top: var(--space-6);
+  list-style: none;
+  border-top: 1px solid var(--border-soft);
+}
+
+.checklist li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding-block: var(--space-3);
+  margin: 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.checklist a {
+  font-weight: 500;
+  color: var(--ink-700);
+  text-decoration: none;
+}
+
+.checklist a:hover {
+  color: var(--teal-700);
+  text-decoration: underline;
+}
+
+.checklist li[data-done='true'] a {
+  color: var(--ink-300);
+}
+
+.checkMark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  font-weight: 700;
+  color: var(--surface);
+  background-color: var(--mist-200);
+  border-radius: 50%;
+}
+
+.checklist li[data-done='true'] .checkMark {
+  background-color: var(--leaf-500);
+}
+
+@media print {
+  .nameForm,
+  .actions,
+  .reviewSection,
+  .eyebrow,
+  .title,
+  .lede {
+    display: none;
+  }
+
+  .page {
+    width: 100%;
+    padding: 0;
+  }
+
+  .certificate {
+    margin: 0;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 42rem) {
+  .certInner {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .certFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .certRight {
+    text-align: left;
+  }
+
+  .certAwarded,
+  .certLabel,
+  .lockedCount {
+    font-size: 1rem;
+  }
+}

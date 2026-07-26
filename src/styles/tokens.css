@@ -1,0 +1,78 @@
+:root {
+  /* Palette: soft mist page, deep teal brand, coral accent */
+  --mist-50: #f7fbf9;
+  --mist-100: #eef4f1;
+  --mist-200: #dfe9e5;
+  --mist-300: #c7d8d2;
+
+  --teal-900: #06333f;
+  --teal-800: #093f52;
+  --teal-700: #0b4f6c;
+  --teal-500: #17789a;
+  --teal-300: #6fb3c6;
+  --teal-100: #d5eaf0;
+
+  --coral-600: #cf4636;
+  --coral-500: #e85d4c;
+  --coral-300: #f7a99d;
+  --coral-100: #fde6e2;
+
+  --sun-500: #f2b134;
+  --sun-100: #fdf1d8;
+
+  --leaf-600: #2f7d55;
+  --leaf-500: #3f9c6a;
+  --leaf-100: #dcf0e5;
+
+  --ink-900: #10222c;
+  --ink-700: #26414d;
+  --ink-500: #4d6675;
+  --ink-300: #7d919c;
+
+  --surface: #ffffff;
+  --surface-sunk: var(--mist-100);
+  --border-soft: rgba(11, 79, 108, 0.14);
+  --border-strong: rgba(11, 79, 108, 0.3);
+
+  --focus-ring: 0 0 0 3px var(--surface), 0 0 0 6px var(--coral-500);
+
+  /* Typography — Sora for display, Lexend for reading comfort */
+  --font-display: 'Sora', ui-sans-serif, sans-serif;
+  --font-body: 'Lexend', ui-sans-serif, sans-serif;
+
+  /* Body text stays a steady 1rem+ across devices; headings scale fluidly. */
+  --step--1: 0.9375rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.125rem, 1.05rem + 0.4vw, 1.3125rem);
+  --step-2: clamp(1.375rem, 1.2rem + 0.9vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.375rem);
+  --step-4: clamp(2.125rem, 1.6rem + 2.6vw, 3.25rem);
+  --step-5: clamp(2.5rem, 1.7rem + 4.2vw, 4.5rem);
+
+  --line-tight: 1.12;
+  --line-snug: 1.3;
+  --line-body: 1.65;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-soft: 0 12px 30px -18px rgba(6, 51, 63, 0.45);
+  --shadow-lift: 0 18px 40px -20px rgba(6, 51, 63, 0.5);
+
+  --content-width: 46rem;
+  --page-width: 74rem;
+
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 0.72, 0.24, 1);
+}

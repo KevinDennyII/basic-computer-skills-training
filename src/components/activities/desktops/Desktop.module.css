@@ -1,0 +1,467 @@
+.screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 16 / 10;
+  min-height: 17rem;
+  overflow: hidden;
+  border-radius: 6px;
+  isolation: isolate;
+}
+
+.wallpaperWindows,
+.wallpaperMac {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.wallpaperWindows {
+  background-image: radial-gradient(60% 80% at 50% 42%, #3f7fa8 0%, #1d4f70 55%, #0d3350 100%),
+    conic-gradient(from 200deg at 50% 45%, #6fb3c6, #2f6f92, #1d4f70, #6fb3c6);
+  background-blend-mode: screen;
+}
+
+.wallpaperMac {
+  background-image: radial-gradient(70% 70% at 30% 20%, #f3a26a 0%, transparent 60%),
+    linear-gradient(160deg, #2b2350 0%, #4a3a7a 40%, #8b5a8f 70%, #d98b6a 100%);
+}
+
+/* Desktop icons */
+.iconGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.desktopIcon {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  width: 4.4rem;
+  padding: 6px 4px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition:
+    background-color 160ms var(--ease-out),
+    transform 200ms var(--ease-spring);
+}
+
+.desktopIcon:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: scale(1.04);
+}
+
+.iconArt {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconArt svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Windows taskbar */
+.taskbarWindows {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  padding: 5px 8px;
+  background-color: rgba(238, 245, 248, 0.86);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.startButton,
+.taskIcon {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  transition:
+    background-color 160ms var(--ease-out),
+    transform 240ms var(--ease-spring);
+}
+
+.startButton:hover:not(:disabled),
+.taskIcon:hover:not(:disabled) {
+  background-color: rgba(11, 79, 108, 0.14);
+  transform: translateY(-3px);
+}
+
+.startGlyph,
+.taskIcon svg,
+.startButton svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.startGlyph svg {
+  width: 100%;
+  height: 100%;
+}
+
+.searchPill {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-700);
+  background-color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(11, 79, 108, 0.18);
+  border-radius: 5px;
+  transition:
+    background-color 160ms var(--ease-out),
+    transform 240ms var(--ease-spring);
+}
+
+.searchPill:hover:not(:disabled) {
+  background-color: #fff;
+  transform: translateY(-2px);
+}
+
+.searchPill svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.searchLabel {
+  white-space: nowrap;
+}
+
+.trayWindows {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.trayItem {
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.9rem;
+  color: var(--ink-700);
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.trayItem:hover:not(:disabled) {
+  background-color: rgba(11, 79, 108, 0.14);
+}
+
+.trayItem svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 3px 8px;
+  font-size: 0.625rem;
+  line-height: 1.25;
+  color: var(--ink-700);
+  text-align: right;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.clock:hover:not(:disabled) {
+  background-color: rgba(11, 79, 108, 0.14);
+}
+
+.clockTime,
+.clockDate {
+  white-space: nowrap;
+}
+
+/* Mac menu bar */
+.menuBar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 0.6875rem;
+  color: #fff;
+  background-color: rgba(28, 24, 48, 0.55);
+  backdrop-filter: blur(14px);
+}
+
+.appleButton {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  padding: 0;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  transition: transform 240ms var(--ease-spring);
+}
+
+.appleButton:hover:not(:disabled) {
+  transform: scale(1.22);
+}
+
+.appleButton svg {
+  width: 100%;
+  height: 100%;
+}
+
+.menuItem {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.menuRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.menuRight .trayItem {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #fff;
+}
+
+.menuRight .trayItem:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.spotlightButton {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  transition:
+    background-color 160ms var(--ease-out),
+    transform 240ms var(--ease-spring);
+}
+
+.spotlightButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.12);
+}
+
+.spotlightButton svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.macClock {
+  white-space: nowrap;
+}
+
+/* Mac window */
+.macWindow {
+  width: min(74%, 20rem);
+  margin: 18px auto 0 22px;
+  overflow: hidden;
+  background-color: #f6f8f9;
+  border-radius: 8px;
+  box-shadow: 0 18px 34px -14px rgba(0, 0, 0, 0.55);
+}
+
+.macWindowBar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 9px;
+  background-color: #e6eaec;
+  border-bottom: 1px solid #d2d9dc;
+}
+
+.dotClose,
+.dotMin,
+.dotMax {
+  width: 0.72rem;
+  height: 0.72rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  transition: transform 220ms var(--ease-spring);
+}
+
+.dotClose {
+  background-color: #ff5f57;
+}
+
+.dotMin {
+  background-color: #febc2e;
+}
+
+.dotMax {
+  background-color: #28c840;
+}
+
+.dotClose:hover:not(:disabled),
+.dotMin:hover:not(:disabled),
+.dotMax:hover:not(:disabled) {
+  transform: scale(1.3);
+}
+
+.macWindowTitle {
+  margin-left: 8px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.macWindowBody {
+  display: flex;
+  min-height: 4.5rem;
+}
+
+.macSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 4.5rem;
+  padding: 9px 7px;
+  background-color: #eceff1;
+}
+
+.macSidebar span {
+  height: 7px;
+  background-color: #cbd5d9;
+  border-radius: 3px;
+}
+
+.macSidebar span:nth-child(2) {
+  width: 80%;
+}
+
+.macSidebar span:nth-child(3) {
+  width: 62%;
+}
+
+.macFiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-content: flex-start;
+  padding: 9px;
+}
+
+.fileChip {
+  padding: 3px 7px;
+  font-size: 0.625rem;
+  color: var(--ink-700);
+  background-color: #fff;
+  border: 1px solid #dde4e7;
+  border-radius: 3px;
+}
+
+/* Mac dock */
+.dock {
+  display: flex;
+  gap: 7px;
+  align-items: flex-end;
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: 8px;
+  padding: 6px 9px;
+  background-color: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+}
+
+.dockIcon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  transition: transform 260ms var(--ease-spring);
+}
+
+.dockIcon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.32));
+}
+
+/* The Dock's signature magnify-on-hover. */
+.dockIcon:hover:not(:disabled) {
+  transform: translateY(-9px) scale(1.28);
+}
+
+.dockDivider {
+  width: 1px;
+  height: 2.2rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* The current target gently pulses so learners are never left hunting. */
+[data-seek='true'] {
+  animation: seek 1.9s ease-in-out infinite;
+}
+
+@keyframes seek {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 93, 76, 0.75);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(232, 93, 76, 0);
+  }
+}
+
+@media (max-width: 42rem) {
+  .screen {
+    aspect-ratio: 4 / 3;
+  }
+
+  .searchLabel,
+  .clockDate {
+    display: none;
+  }
+
+  .macWindow {
+    margin-left: 12px;
+  }
+
+  .dockIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+}

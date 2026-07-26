@@ -1,0 +1,124 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header,
+.headerHome {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  width: min(100% - 2rem, var(--page-width));
+  margin-inline: auto;
+  padding-block: var(--space-4);
+}
+
+.headerHome {
+  /* On the landing page the brand belongs in the hero, so the bar stays quiet. */
+  padding-block: var(--space-4) var(--space-2);
+}
+
+.brandLink {
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+
+.navLink {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--teal-800);
+  text-decoration: none;
+  border-radius: 999px;
+  transition: background-color 160ms var(--ease-out);
+}
+
+.navLink:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.navLink[aria-current='page'] {
+  color: var(--teal-900);
+  background-color: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--shadow-soft);
+}
+
+.progressReadout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 8rem;
+}
+
+.progressTrack {
+  height: 8px;
+  overflow: hidden;
+  background-color: rgba(6, 51, 63, 0.12);
+  border-radius: 999px;
+}
+
+.progressFill {
+  height: 100%;
+  background-image: linear-gradient(90deg, var(--teal-500), var(--leaf-500));
+  border-radius: inherit;
+  transition: width 600ms var(--ease-spring);
+}
+
+.progressText {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--ink-500);
+  letter-spacing: 0.01em;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  width: min(100% - 2rem, var(--page-width));
+  margin-inline: auto;
+  padding-block: var(--space-7) var(--space-6);
+  font-size: var(--step--1);
+  color: var(--ink-500);
+  border-top: 1px solid var(--border-soft);
+  margin-top: var(--space-8);
+}
+
+.footerBrand {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--teal-700);
+}
+
+@media (max-width: 40rem) {
+  .header,
+  .headerHome {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    margin-inline-start: 0;
+  }
+
+  .progressReadout {
+    margin-inline-start: auto;
+  }
+
+  /* Small text that carries meaning gets a bump on narrow screens. */
+  .progressText,
+  .navLink,
+  .footer {
+    font-size: 1rem;
+  }
+}

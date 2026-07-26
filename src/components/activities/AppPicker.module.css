@@ -1,0 +1,237 @@
+.scenario {
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--surface);
+  background-image: linear-gradient(135deg, var(--leaf-500), var(--leaf-600));
+  border-radius: var(--radius-md);
+}
+
+.appGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.appWrap {
+  position: relative;
+}
+
+.appCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-4);
+  text-align: left;
+  background-color: var(--mist-50);
+  border: 2px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  transition:
+    transform 200ms var(--ease-spring),
+    border-color 200ms var(--ease-out),
+    background-color 200ms var(--ease-out);
+}
+
+.appCard:hover:not(:disabled) {
+  transform: translateY(-4px);
+  background-color: var(--surface);
+  border-color: var(--teal-300);
+}
+
+.appCard[data-state='correct'] {
+  background-color: var(--leaf-100);
+  border-color: var(--leaf-500);
+  animation: pop 500ms var(--ease-spring);
+}
+
+.appCard[data-state='wrong'] {
+  background-color: var(--coral-100);
+  border-color: var(--coral-500);
+  animation: shake 420ms ease-in-out;
+}
+
+.appCard[data-state='muted'] {
+  opacity: 0.55;
+}
+
+.appCard:disabled {
+  cursor: default;
+}
+
+.appName {
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.appPair {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--teal-700);
+}
+
+.appJob {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--ink-500);
+}
+
+.resultRight,
+.resultWrong {
+  padding: var(--space-4) var(--space-5);
+  margin-top: var(--space-4);
+  border-radius: var(--radius-md);
+  animation: fadeUp 320ms var(--ease-out) both;
+}
+
+.resultRight {
+  color: #17512f;
+  background-color: var(--leaf-100);
+}
+
+.resultWrong {
+  color: var(--ink-700);
+  background-color: var(--sun-100);
+}
+
+.nextButton {
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--surface);
+  background-color: var(--teal-700);
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: transform 200ms var(--ease-spring);
+}
+
+.nextButton:hover {
+  transform: translateY(-2px);
+}
+
+.summary {
+  padding: var(--space-5);
+  background-color: var(--mist-100);
+  border-radius: var(--radius-md);
+}
+
+.summaryHeadline {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.recap {
+  padding: 0;
+  margin-top: var(--space-4);
+  list-style: none;
+}
+
+.recap li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.recap li:last-child {
+  border-bottom: none;
+}
+
+.recap strong {
+  font-family: var(--font-display);
+  color: var(--ink-900);
+}
+
+.recap span {
+  font-size: var(--step--1);
+  color: var(--teal-700);
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter {
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--ink-500);
+}
+
+.restart {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--teal-800);
+  background-color: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.restart:hover {
+  color: var(--surface);
+  background-color: var(--teal-700);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 42rem) {
+  .appPair,
+  .appJob,
+  .counter,
+  .recap span {
+    font-size: 1rem;
+  }
+}

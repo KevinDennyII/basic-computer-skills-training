@@ -1,0 +1,127 @@
+.compact,
+.hero {
+  display: inline-flex;
+  gap: var(--space-3);
+  align-items: center;
+  color: var(--teal-800);
+  text-decoration: none;
+}
+
+.glyph {
+  flex: none;
+  width: 2.25rem;
+  height: auto;
+  overflow: visible;
+}
+
+.hero .glyph {
+  width: clamp(3.25rem, 6vw, 5.25rem);
+}
+
+.step1,
+.step2,
+.step3 {
+  fill: var(--teal-500);
+  transform-origin: bottom center;
+}
+
+.step2 {
+  fill: var(--teal-700);
+}
+
+.step3 {
+  fill: var(--teal-900);
+}
+
+.cursor {
+  transform-origin: 30px 4px;
+}
+
+.compact:hover .cursor,
+.hero:hover .cursor {
+  animation: nudge 700ms var(--ease-spring);
+}
+
+/* Scoped so the mark is never invisible when animations do not run. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .step1 {
+    animation: rise 600ms var(--ease-spring) both;
+  }
+
+  .hero .step2 {
+    animation: rise 600ms 120ms var(--ease-spring) both;
+  }
+
+  .hero .step3 {
+    animation: rise 600ms 240ms var(--ease-spring) both;
+  }
+
+  .hero .cursor {
+    animation: drop 700ms 420ms var(--ease-spring) both;
+  }
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--teal-900);
+}
+
+.hero .name {
+  font-size: var(--step-4);
+}
+
+.tagline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--teal-500);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.hero .tagline {
+  font-size: clamp(0.8125rem, 0.6rem + 0.5vw, 1rem);
+}
+
+@keyframes rise {
+  from {
+    transform: scaleY(0.2);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-14px) rotate(-14deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  35% {
+    transform: rotate(-12deg) translateY(-3px);
+  }
+  70% {
+    transform: rotate(5deg) translateY(1px);
+  }
+}

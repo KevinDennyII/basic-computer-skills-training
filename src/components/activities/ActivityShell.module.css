@@ -1,0 +1,48 @@
+.shell {
+  position: relative;
+  padding: var(--space-6);
+  margin-top: var(--space-8);
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border-top: 4px solid var(--accent, var(--teal-700));
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent, var(--teal-700));
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.title {
+  margin-top: var(--space-2);
+  font-size: var(--step-2);
+}
+
+.intro {
+  max-width: 46rem;
+  margin-top: var(--space-2);
+  color: var(--ink-500);
+}
+
+.content {
+  margin-top: var(--space-5);
+}
+
+.footer {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-soft);
+}
+
+@media (max-width: 42rem) {
+  .shell {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .eyebrow {
+    font-size: 0.875rem;
+  }
+}
